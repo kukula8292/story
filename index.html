@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Story Shelf — Books For Sale · Sri Lanka</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --gold:#C9A84C;--gl:#F0D080;--gd:#8B6914;
+  --cream:#FDF6E3;--cd:#F5E9C8;
+  --ink:#1A1209;--is:#3D2B1F;--im:#7A6355;
+  --red:#8B1A1A;--r2:#C94040;
+  --sh:rgba(26,18,9,.18);--shd:rgba(26,18,9,.38);
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);overflow-x:hidden}
+
+/* HERO */
+header{min-height:100vh;background:#0f0a05;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;overflow:hidden;padding:2rem}
+.hbg{position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 50% 45%,rgba(201,168,76,.13) 0%,transparent 70%)}
+.hbadge{display:inline-block;border:1px solid var(--gold);color:var(--gold);font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;padding:.38rem 1.2rem;border-radius:50px;margin-bottom:1.4rem;animation:fu .8s ease .2s both}
+h1.ht{font-family:'Playfair Display',serif;font-size:clamp(3rem,9vw,7rem);font-weight:900;color:#fff;line-height:1.05;animation:fu .9s ease .4s both;margin-bottom:.4rem}
+h1.ht em{color:var(--gold);font-style:italic}
+.hs{font-size:1rem;color:rgba(255,255,255,.5);margin:1rem 0 2.4rem;animation:fu .9s ease .6s both;max-width:460px}
+.hcta{display:inline-flex;align-items:center;gap:.5rem;background:var(--gold);color:var(--ink);font-weight:600;font-size:.92rem;padding:.82rem 2rem;border-radius:50px;text-decoration:none;animation:fu .9s ease .8s both;transition:transform .2s,box-shadow .2s}
+.hcta:hover{transform:translateY(-3px);box-shadow:0 14px 32px rgba(201,168,76,.35)}
+.sdot{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.3);font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;animation:fu .8s ease 1.2s both}
+@keyframes fu{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+
+/* LAYOUT */
+.wrap{max-width:1080px;margin:0 auto;padding:0 1.5rem}
+section{padding:5rem 0}
+.sl{font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gd);font-weight:600;margin-bottom:.4rem}
+.st{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;color:var(--ink);margin-bottom:2.8rem;line-height:1.15}
+.st span{color:var(--red)}
+
+/* SERIES ROW */
+.sr{display:flex;align-items:center;gap:1rem;margin-bottom:1.6rem}
+.sr-line{flex:1;height:1px;background:linear-gradient(to right,var(--gd),transparent);opacity:.3}
+.sr-txt{font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gd);font-weight:600;white-space:nowrap}
+
+/* BOOK GRID */
+.bg{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1.8rem;margin-bottom:3rem}
+
+/* BOOK CARD */
+.bc{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 4px 22px var(--sh);transition:transform .3s,box-shadow .3s;cursor:pointer;position:relative}
+.bc:hover{transform:translateY(-9px) rotate(-.4deg);box-shadow:0 22px 52px var(--shd)}
+.bc:hover .co{opacity:1}
+.cw{width:100%;height:300px;position:relative;overflow:hidden;background:#1a1209;display:flex;align-items:center;justify-content:center}
+.cw img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s;position:absolute;top:0;left:0}
+.bc:hover .cw img{transform:scale(1.05)}
+.cph{font-size:5rem;position:relative;z-index:1}
+.co{position:absolute;inset:0;background:rgba(15,10,5,.65);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .3s;color:#fff;font-size:.88rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;z-index:3}
+.bb{position:absolute;top:.9rem;right:.9rem;background:var(--red);color:#fff;font-size:.62rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:.22rem .65rem;border-radius:50px;z-index:4}
+.bi{padding:1.2rem 1.2rem 1.5rem}
+.bser{font-size:.67rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gd);font-weight:600;margin-bottom:.28rem}
+.bt{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--ink);margin-bottom:.3rem;line-height:1.25}
+.ba{font-size:.78rem;color:var(--im);margin-bottom:.9rem}
+.bp{display:flex;align-items:baseline;gap:.35rem}
+.pt{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:900;color:var(--red)}
+.pc{font-size:.75rem;color:var(--im);font-weight:500}
+
+/* PACKAGES */
+.ps{background:#0f0a05;padding:5rem 1.5rem}
+.ps .sl{color:rgba(240,208,128,.7)}
+.ps .st{color:#fff}
+.ps .st span{color:var(--gold)}
+.pg{display:grid;grid-template-columns:repeat(auto-fit,minmax(275px,1fr));gap:1.4rem}
+.pc2{background:rgba(255,255,255,.04);border:1px solid rgba(201,168,76,.18);border-radius:20px;padding:1.8rem;cursor:pointer;position:relative;overflow:hidden;transition:transform .3s,border-color .3s,background .3s}
+.pc2::before{content:'';position:absolute;top:-60%;left:-60%;width:200%;height:200%;background:radial-gradient(circle,rgba(201,168,76,.07) 0%,transparent 60%);opacity:0;transition:opacity .4s}
+.pc2:hover{transform:translateY(-6px);border-color:rgba(201,168,76,.55);background:rgba(255,255,255,.07)}
+.pc2:hover::before{opacity:1}
+.pc2.feat{border-color:var(--gold);background:rgba(201,168,76,.07)}
+.pfb{display:inline-block;background:var(--gold);color:var(--ink);font-size:.62rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;padding:.22rem .75rem;border-radius:50px;margin-bottom:.9rem}
+.pi{font-size:2.2rem;margin-bottom:.85rem}
+.pn{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:#fff;margin-bottom:.45rem}
+.pb{font-size:.8rem;color:rgba(255,255,255,.45);margin-bottom:1.4rem;line-height:1.65}
+.pb strong{color:rgba(255,255,255,.75);font-weight:500}
+.pp{display:flex;align-items:flex-end;gap:.8rem;flex-wrap:wrap}
+.ppn{font-family:'Playfair Display',serif;font-size:2.1rem;font-weight:900;color:var(--gold);line-height:1}
+.ppw{font-size:.85rem;color:rgba(255,255,255,.3);text-decoration:line-through;padding-bottom:.15rem}
+.pps{background:rgba(139,26,26,.7);color:#ffaaaa;font-size:.67rem;font-weight:600;padding:.18rem .55rem;border-radius:50px;margin-left:auto}
+
+/* SAVINGS */
+.sb{background:linear-gradient(135deg,var(--red),var(--r2));border-radius:20px;padding:2.5rem;text-align:center;margin-top:2rem}
+.sb .big{font-family:'Playfair Display',serif;font-size:3.5rem;font-weight:900;color:var(--gl);display:block;margin-bottom:.2rem}
+.sb h3{font-family:'Playfair Display',serif;font-size:1.7rem;color:#fff;margin-bottom:.5rem}
+.sb p{color:rgba(255,255,255,.65);font-size:.9rem;margin-bottom:.4rem}
+
+/* TABLE */
+.tw{overflow-x:auto;margin-top:-.5rem}
+table{width:100%;border-collapse:collapse;font-size:.88rem}
+thead tr{background:var(--ink);color:#fff}
+thead th{padding:1rem 1.1rem;font-weight:500;text-align:left}
+thead th:first-child{border-radius:12px 0 0 0}
+thead th:last-child{border-radius:0 12px 0 0;text-align:center}
+tbody td{padding:.95rem 1.1rem;border-bottom:1px solid #e8dcc8}
+tbody tr:nth-child(even){background:#fafaf5}
+tbody tr:last-child td{font-weight:700}
+tbody tr:last-child{background:rgba(201,168,76,.09)}
+.pill{display:inline-block;padding:.18rem .65rem;border-radius:50px;font-size:.75rem;font-weight:600}
+.pg2{background:#e8f5e9;color:#2e7d32}
+.pr{background:var(--red);color:#fff}
+
+/* ABOUT */
+.ac{background:#fff;border-radius:18px;padding:1.8rem;box-shadow:0 4px 18px var(--sh)}
+.at{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--ink);margin-bottom:.6rem}
+.am{font-size:.78rem;color:var(--gd);letter-spacing:.12em;text-transform:uppercase;font-weight:600;margin-bottom:.8rem}
+.ad{font-size:.88rem;color:var(--is);line-height:1.8}
+.tag{display:inline-block;font-size:.7rem;padding:.22rem .7rem;border-radius:50px;font-weight:600;margin:.25rem .15rem 0 0}
+.tag-g{background:rgba(201,168,76,.15);color:var(--gd)}
+.tag-r{background:rgba(139,26,26,.1);color:var(--red)}
+
+/* CONTACT */
+.ct{background:var(--cd);border-top:1px solid rgba(201,168,76,.3);padding:3.5rem 1.5rem;text-align:center}
+.ct h3{font-family:'Playfair Display',serif;font-size:1.6rem;color:var(--ink);margin-bottom:.5rem}
+.ct p{color:var(--im);font-size:.88rem;margin-bottom:1.5rem;max-width:420px;margin-left:auto;margin-right:auto}
+.cb{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.cbtn{display:inline-flex;align-items:center;gap:.5rem;padding:.78rem 1.8rem;border-radius:50px;font-size:.9rem;font-weight:600;text-decoration:none;transition:transform .2s,box-shadow .2s;cursor:pointer;border:none}
+.cbtn:hover{transform:translateY(-3px);box-shadow:0 10px 28px var(--sh)}
+.cw2{background:#25D366;color:#fff}
+.cc{background:var(--ink);color:#fff}
+
+footer{background:var(--ink);color:rgba(255,255,255,.3);text-align:center;padding:1.8rem 1.5rem;font-size:.8rem}
+footer span{color:var(--gold)}
+
+/* MODAL */
+.mo{position:fixed;inset:0;background:rgba(15,10,5,.82);backdrop-filter:blur(8px);z-index:1000;display:flex;align-items:center;justify-content:center;padding:1rem;opacity:0;pointer-events:none;transition:opacity .3s}
+.mo.on{opacity:1;pointer-events:all}
+.mb{background:var(--cream);border-radius:24px;width:100%;max-width:580px;max-height:90vh;overflow-y:auto;transform:translateY(28px) scale(.97);transition:transform .35s cubic-bezier(.34,1.56,.64,1);position:relative}
+.mo.on .mb{transform:translateY(0) scale(1)}
+.mi2{width:100%;height:260px;object-fit:cover;border-radius:24px 24px 0 0;display:block}
+.mph{width:100%;height:260px;display:flex;align-items:center;justify-content:center;font-size:6rem;border-radius:24px 24px 0 0}
+.mbd{padding:1.8rem}
+.mser{font-size:.67rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gd);font-weight:600;margin-bottom:.35rem}
+.mti{font-family:'Playfair Display',serif;font-size:1.75rem;font-weight:900;color:var(--ink);margin-bottom:.3rem;line-height:1.2}
+.mau{color:var(--im);font-size:.88rem;margin-bottom:1.1rem}
+.mde{color:var(--is);font-size:.9rem;line-height:1.8;margin-bottom:1.5rem}
+.mm{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem;margin-bottom:1.5rem}
+.mmi{background:rgba(201,168,76,.12);border-radius:10px;padding:.75rem;text-align:center}
+.mml{font-size:.62rem;text-transform:uppercase;letter-spacing:.14em;color:var(--gd);display:block;margin-bottom:.18rem;font-weight:600}
+.mmv{font-size:.88rem;font-weight:500;color:var(--ink)}
+.mpb{background:var(--ink);border-radius:14px;padding:1.2rem 1.4rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.8rem}
+.mpl{color:rgba(255,255,255,.45);font-size:.8rem}
+.mplk{color:rgba(255,255,255,.35);font-size:.72rem;display:block}
+.mpv{font-family:'Playfair Display',serif;font-size:2.1rem;font-weight:900;color:var(--gold);line-height:1}
+.mcl{position:absolute;top:1rem;right:1rem;width:36px;height:36px;background:rgba(15,10,5,.55);border:none;border-radius:50%;color:#fff;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;z-index:5}
+.mcl:hover{background:var(--red)}
+.mb::-webkit-scrollbar{width:4px}
+.mb::-webkit-scrollbar-thumb{background:var(--gold);border-radius:10px}
+
+/* REVEAL */
+.rv{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+.rv.vis{opacity:1;transform:translateY(0)}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hbg"></div>
+  <div class="hbadge">📍 Sri Lanka &nbsp;·&nbsp; Books For Sale</div>
+  <h1 class="ht">The <em>Story</em><br>Shelf</h1>
+  <p class="hs">Beloved fantasy classics in great condition — find your next adventure at amazing prices in LKR.</p>
+  <a href="#books" class="hcta">Browse Books ↓</a>
+  <div class="sdot">↓ scroll to explore</div>
+</header>
+
+<!-- INDIVIDUAL BOOKS -->
+<section id="books">
+<div class="wrap">
+
+  <div class="rv"><div class="sl">Available Now</div><div class="st">Individual <span>Books</span></div></div>
+
+  <div class="sr rv d1">
+    <span class="sr-txt">Percy Jackson &amp; the Olympians — Rick Riordan</span>
+    <div class="sr-line"></div>
+  </div>
+  <div class="bg">
+
+    <div class="bc rv d1" onclick="openBook('lightning')">
+      <div class="bb">Book 1</div>
+      <div class="cw">
+        <img src="https://covers.openlibrary.org/b/id/8231990-L.jpg" alt="The Lightning Thief" onerror="this.style.display='none'">
+        <span class="cph" id="e1" style="display:none">⚡</span>
+        <div class="co">View Details →</div>
+      </div>
+      <div class="bi">
+        <div class="bser">Percy Jackson · Book 1</div>
+        <div class="bt">The Lightning Thief</div>
+        <div class="ba">by Rick Riordan</div>
+        <div class="bp"><span class="pt">Rs. 1,400</span><span class="pc">LKR</span></div>
+      </div>
+    </div>
+
+    <div class="bc rv d2" onclick="openBook('labyrinth')">
+      <div class="bb">Book 4</div>
+      <div class="cw">
+        <img src="https://covers.openlibrary.org/b/id/8231992-L.jpg" alt="Battle of the Labyrinth" onerror="this.style.display='none'">
+        <span class="cph" id="e2" style="display:none">🌀</span>
+        <div class="co">View Details →</div>
+      </div>
+      <div class="bi">
+        <div class="bser">Percy Jackson · Book 4</div>
+        <div class="bt">The Battle of the Labyrinth</div>
+        <div class="ba">by Rick Riordan</div>
+        <div class="bp"><span class="pt">Rs. 1,100</span><span class="pc">LKR</span></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="sr rv d1">
+    <span class="sr-txt">The Mortal Instruments — Cassandra Clare</span>
+    <div class="sr-line"></div>
+  </div>
+  <div class="bg">
+
+    <div class="bc rv d1" onclick="openBook('bones')">
+      <div class="bb">Book 1</div>
+      <div class="cw">
+        <img src="https://covers.openlibrary.org/b/id/8228691-L.jpg" alt="City of Bones" onerror="this.style.display='none'">
+        <span class="cph" id="e3" style="display:none">🗡️</span>
+        <div class="co">View Details →</div>
+      </div>
+      <div class="bi">
+        <div class="bser">The Mortal Instruments · Book 1</div>
+        <div class="bt">City of Bones</div>
+        <div class="ba">by Cassandra Clare</div>
+        <div class="bp"><span class="pt">Rs. 1,100</span><span class="pc">LKR</span></div>
+      </div>
+    </div>
+
+    <div class="bc rv d2" onclick="openBook('fire')">
+      <div class="bb">Book 6</div>
+      <div class="cw">
+        <img src="https://covers.openlibrary.org/b/id/8232000-L.jpg" alt="City of Heavenly Fire" onerror="this.style.display='none'">
+        <span class="cph" id="e4" style="display:none">🔥</span>
+        <div class="co">View Details →</div>
+      </div>
+      <div class="bi">
+        <div class="bser">The Mortal Instruments · Book 6</div>
+        <div class="bt">City of Heavenly Fire</div>
+        <div class="ba">by Cassandra Clare</div>
+        <div class="bp"><span class="pt">Rs. 1,400</span><span class="pc">LKR</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</section>
+
+<!-- PACKAGES -->
+<div class="ps">
+<div class="wrap">
+  <div class="rv"><div class="sl">Best Value</div><div class="st">Book <span>Bundles</span></div></div>
+  <div class="pg">
+
+    <div class="pc2 rv d1" onclick="openPkg('pj')">
+      <div class="pi">⚡🌀</div>
+      <div class="pn">Percy Jackson Duo</div>
+      <div class="pb"><strong>The Lightning Thief</strong> + <strong>The Battle of the Labyrinth</strong><br>Books 1 &amp; 4 together</div>
+      <div class="pp">
+        <div><div class="ppn">Rs. 2,200</div><div style="color:rgba(255,255,255,.3);font-size:.68rem">LKR</div></div>
+        <div class="ppw">Rs. 2,500</div>
+        <div class="pps">Save 300</div>
+      </div>
+    </div>
+
+    <div class="pc2 rv d2" onclick="openPkg('mi')">
+      <div class="pi">🗡️🔥</div>
+      <div class="pn">Mortal Instruments Duo</div>
+      <div class="pb"><strong>City of Bones</strong> + <strong>City of Heavenly Fire</strong><br>Books 1 &amp; 6 together</div>
+      <div class="pp">
+        <div><div class="ppn">Rs. 2,400</div><div style="color:rgba(255,255,255,.3);font-size:.68rem">LKR</div></div>
+        <div class="ppw">Rs. 2,500</div>
+        <div class="pps">Save 100</div>
+      </div>
+    </div>
+
+    <div class="pc2 feat rv d3" onclick="openPkg('mega')">
+      <div class="pfb">⭐ Best Deal</div>
+      <div class="pi">📚</div>
+      <div class="pn">The Ultimate Collection</div>
+      <div class="pb"><strong>All 4 Books</strong> — Percy Jackson (1 &amp; 4) + Mortal Instruments (1 &amp; 6)</div>
+      <div class="pp">
+        <div><div class="ppn">Rs. 4,200</div><div style="color:rgba(255,255,255,.3);font-size:.68rem">LKR</div></div>
+        <div class="ppw">Rs. 4,800</div>
+        <div class="pps">Save 600</div>
+      </div>
+    </div>
+
+  </div>
+  <div class="sb rv">
+    <span class="big">Rs. 600</span>
+    <h3>Maximum Savings — Ultimate Bundle</h3>
+    <p>Get all 4 books and save Rs. 600 vs. buying each individually.</p>
+    <p style="font-size:.85rem;color:rgba(255,255,255,.4)">Individual total: <strong style="color:#fff">Rs. 4,800</strong> → Bundle: <strong style="color:var(--gold)">Rs. 4,200</strong></p>
+  </div>
+</div>
+</div>
+
+<!-- TABLE -->
+<section>
+<div class="wrap">
+  <div class="rv"><div class="sl">At a Glance</div><div class="st">Price <span>Summary</span></div></div>
+  <div class="tw rv">
+    <table>
+      <thead>
+        <tr>
+          <th>Book / Bundle</th>
+          <th>Series</th>
+          <th style="text-align:center">Individual</th>
+          <th style="text-align:center">Bundle Price</th>
+          <th style="text-align:center">Saving</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="font-weight:600">⚡ The Lightning Thief</td><td style="color:var(--im)">Percy Jackson Book 1</td><td style="text-align:center;font-weight:600">Rs. 1,400</td><td style="text-align:center;color:var(--im)">—</td><td style="text-align:center">—</td></tr>
+        <tr><td style="font-weight:600">🌀 Battle of the Labyrinth</td><td style="color:var(--im)">Percy Jackson Book 4</td><td style="text-align:center;font-weight:600">Rs. 1,100</td><td style="text-align:center;color:var(--im)">—</td><td style="text-align:center">—</td></tr>
+        <tr><td style="font-weight:600">⚡🌀 Percy Jackson Duo</td><td style="color:var(--im)">Books 1 &amp; 4</td><td style="text-align:center;color:var(--im);text-decoration:line-through">Rs. 2,500</td><td style="text-align:center;color:var(--red);font-weight:700">Rs. 2,200</td><td style="text-align:center"><span class="pill pg2">Rs. 300</span></td></tr>
+        <tr><td style="font-weight:600">🗡️ City of Bones</td><td style="color:var(--im)">Mortal Instruments Book 1</td><td style="text-align:center;font-weight:600">Rs. 1,100</td><td style="text-align:center;color:var(--im)">—</td><td style="text-align:center">—</td></tr>
+        <tr><td style="font-weight:600">🔥 City of Heavenly Fire</td><td style="color:var(--im)">Mortal Instruments Book 6</td><td style="text-align:center;font-weight:600">Rs. 1,400</td><td style="text-align:center;color:var(--im)">—</td><td style="text-align:center">—</td></tr>
+        <tr><td style="font-weight:600">🗡️🔥 Mortal Instruments Duo</td><td style="color:var(--im)">Books 1 &amp; 6</td><td style="text-align:center;color:var(--im);text-decoration:line-through">Rs. 2,500</td><td style="text-align:center;color:var(--red);font-weight:700">Rs. 2,400</td><td style="text-align:center"><span class="pill pg2">Rs. 100</span></td></tr>
+        <tr><td>📚 Ultimate Collection (All 4)</td><td style="color:var(--im);font-weight:400">All 4 books</td><td style="text-align:center;color:var(--im);text-decoration:line-through;font-weight:400">Rs. 4,800</td><td style="text-align:center;color:var(--red);font-family:'Playfair Display',serif;font-size:1.15rem">Rs. 4,200</td><td style="text-align:center"><span class="pill pr">Rs. 600 🎉</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</section>
+
+<!-- ABOUT -->
+<section style="padding-top:0">
+<div class="wrap">
+  <div class="rv"><div class="sl">Why These Books?</div><div class="st">About the <span>Series</span></div></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem">
+
+    <div class="ac rv d1">
+      <div style="font-size:2rem;margin-bottom:1rem">⚡</div>
+      <div class="at">Percy Jackson &amp; the Olympians</div>
+      <div class="am">Rick Riordan · 2005–2009</div>
+      <p class="ad">Percy Jackson discovers he is the son of a Greek god and must navigate a modern world filled with monsters, demigods, and Olympian drama. Bursting with humour, heart, and mythology — one of the most beloved fantasy series of all time. These two books (Book 1 &amp; Book 4) are standout entries in the five-book saga.</p>
+      <div style="margin-top:1rem">
+        <span class="tag tag-g">Greek Mythology</span>
+        <span class="tag tag-g">Adventure</span>
+        <span class="tag tag-g">Middle Grade</span>
+        <span class="tag tag-g">Award-Winning</span>
+      </div>
+    </div>
+
+    <div class="ac rv d2">
+      <div style="font-size:2rem;margin-bottom:1rem">🗡️</div>
+      <div class="at">The Mortal Instruments</div>
+      <div class="am">Cassandra Clare · 2007–2014</div>
+      <p class="ad">Shadowhunters, demons, warlocks, and forbidden love — set in a hidden world alongside our own. Clary Fray's journey from ordinary teen to powerful Shadowhunter spans six gripping books. City of Bones opens this rich world; City of Heavenly Fire delivers the explosive, emotional conclusion to the entire saga at over 725 pages.</p>
+      <div style="margin-top:1rem">
+        <span class="tag tag-r">Urban Fantasy</span>
+        <span class="tag tag-r">YA Fiction</span>
+        <span class="tag tag-r">Romance</span>
+        <span class="tag tag-r">NYT Bestseller</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+</section>
+
+<!-- CONTACT -->
+<div class="ct">
+  <h3>Interested? Let's Talk!</h3>
+  <p>Based in Sri Lanka. Books are second-hand but well-loved and in great condition. Message to arrange a deal or ask any questions.</p>
+  <div class="cb">
+    <a class="cbtn cw2" href="https://wa.me/" target="_blank">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      WhatsApp Me
+    </a>
+    <a class="cbtn cc" href="tel:">📞 Call / Text</a>
+  </div>
+</div>
+
+<footer>
+  <p>The <span>Story Shelf</span> &nbsp;·&nbsp; Sri Lanka &nbsp;·&nbsp; All prices in Sri Lankan Rupees (LKR)</p>
+</footer>
+
+<!-- MODAL -->
+<div class="mo" id="mo" onclick="closeMO(event)">
+  <div class="mb" id="mb">
+    <button class="mcl" onclick="closeM()">✕</button>
+    <div id="mc"></div>
+  </div>
+</div>
+
+<script>
+const BD={
+  lightning:{
+    ser:'Percy Jackson & the Olympians · Book 1',ti:'The Lightning Thief',au:'Rick Riordan',
+    img:'https://covers.openlibrary.org/b/id/8231990-L.jpg',
+    bg:'linear-gradient(135deg,#1a3a6e,#2a5ab5)',em:'⚡',
+    pr:'1,400',pg:'377',yr:'2005',gn:'Fantasy',
+    de:'Twelve-year-old Percy Jackson has always felt different — kicked out of school after school, plagued by strange events he can\'t explain. Then a monster attacks during a field trip and everything changes. Percy discovers he is the son of Poseidon, god of the sea. His mother has been taken to the Underworld, and to save her Percy must retrieve Zeus\'s stolen lightning bolt — the most powerful weapon in the universe — before a catastrophic war among the Olympians destroys the world. A modern masterpiece that launched one of the most beloved fantasy series ever written, with over 180 million copies sold worldwide.'
+  },
+  labyrinth:{
+    ser:'Percy Jackson & the Olympians · Book 4',ti:'The Battle of the Labyrinth',au:'Rick Riordan',
+    img:'https://covers.openlibrary.org/b/id/8231992-L.jpg',
+    bg:'linear-gradient(135deg,#2d1a0a,#7a3a0a)',em:'🌀',
+    pr:'1,100',pg:'361',yr:'2008',gn:'Fantasy',
+    de:'Percy is not expecting freshman orientation to be eventful — but a monster is hiding among the cheerleaders. Worse, beneath Camp Half-Blood lies a passage into the legendary Labyrinth, built by the craftsman Daedalus. The evil Titan lord Kronos plans to use it as a back door to destroy the camp. Percy, Annabeth, Grover, and Nico must venture into the terrifying Labyrinth on a quest to find Daedalus first. The fourth instalment ramps up the stakes with breathless action, shocking twists, and an unforgettable climax that changes everything.'
+  },
+  bones:{
+    ser:'The Mortal Instruments · Book 1',ti:'City of Bones',au:'Cassandra Clare',
+    img:'https://covers.openlibrary.org/b/id/8228691-L.jpg',
+    bg:'linear-gradient(135deg,#1a0a1a,#5a1a5a)',em:'🗡️',
+    pr:'1,100',pg:'485',yr:'2007',gn:'Urban Fantasy',
+    de:'When fifteen-year-old Clary Fray heads out to a Brooklyn nightclub, she sees three teenagers commit what appears to be a murder — but she is the only one who can see them, and there is no body. Clary is suddenly hurled into a hidden world of Shadowhunters — half-angel warriors who protect humanity from demons — alongside warlocks, faeries, vampires, and werewolves. As she searches for her missing mother, Clary uncovers secrets that will shatter everything she thought she knew. The thrilling first book in a series that became a global phenomenon, with a major TV adaptation (Shadowhunters).'
+  },
+  fire:{
+    ser:'The Mortal Instruments · Book 6',ti:'City of Heavenly Fire',au:'Cassandra Clare',
+    img:'https://covers.openlibrary.org/b/id/8232000-L.jpg',
+    bg:'linear-gradient(135deg,#3a0a0a,#a01010)',em:'🔥',
+    pr:'1,400',pg:'725',yr:'2014',gn:'Urban Fantasy',
+    de:'The breathtaking, emotional conclusion to The Mortal Instruments saga. Sebastian Morgenstern has raised an army and is devastating Shadowhunter Institutes across the globe. Clary, Jace, Simon, Isabelle, Alec, and Magnus must descend into a demon realm — a place so dangerous that even angels fear it — to stop Sebastian\'s apocalyptic plan once and for all. At over 725 pages, this epic finale delivers fierce battles, shocking revelations, heartbreaking losses, and a satisfying resolution to every storyline fans have loved across six books. A must-have ending to an unforgettable series.'
+  }
+};
+
+const PD={
+  pj:{em:'⚡🌀',nm:'Percy Jackson Duo',
+    de:'The perfect pair for any Greek mythology lover. Follow Percy Jackson from the very beginning of his divine destiny through one of the most action-packed entries in the series. A great starting point for new readers or a perfect gift.',
+    bks:['The Lightning Thief (Percy Jackson Book 1)','The Battle of the Labyrinth (Percy Jackson Book 4)'],
+    pr:'2,200',ws:'2,500',sv:'300'},
+  mi:{em:'🗡️🔥',nm:'Mortal Instruments Duo',
+    de:'Start and finish the Shadowhunter journey in one purchase. From Clary\'s shocking awakening to the earth-shattering series finale — the ultimate opening and closing chapters of The Mortal Instruments.',
+    bks:['City of Bones (Mortal Instruments Book 1)','City of Heavenly Fire (Mortal Instruments Book 6)'],
+    pr:'2,400',ws:'2,500',sv:'100'},
+  mega:{em:'📚',nm:'The Ultimate Collection',feat:true,
+    de:'Four legendary books. Two of the most beloved fantasy series of our generation. Perfect for a voracious reader, an amazing gift, or anyone who wants to dive deep into both worlds — and the absolute best value available.',
+    bks:['The Lightning Thief','The Battle of the Labyrinth','City of Bones','City of Heavenly Fire'],
+    pr:'4,200',ws:'4,800',sv:'600'}
+};
+
+function openBook(id){
+  const b=BD[id];
+  document.getElementById('mc').innerHTML=`
+    <div style="position:relative;height:260px;background:${b.bg};border-radius:24px 24px 0 0;overflow:hidden;display:flex;align-items:center;justify-content:center">
+      <img src="${b.img}" alt="${b.ti}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:24px 24px 0 0" onerror="this.style.display='none'">
+      <span style="font-size:5rem;position:relative;z-index:1">${b.em}</span>
+    </div>
+    <div class="mbd">
+      <div class="mser">${b.ser}</div>
+      <div class="mti">${b.ti}</div>
+      <div class="mau">by ${b.au}</div>
+      <p class="mde">${b.de}</p>
+      <div class="mm">
+        <div class="mmi"><span class="mml">Genre</span><span class="mmv">${b.gn}</span></div>
+        <div class="mmi"><span class="mml">Pages</span><span class="mmv">~${b.pg}</span></div>
+        <div class="mmi"><span class="mml">Published</span><span class="mmv">${b.yr}</span></div>
+      </div>
+      <div class="mpb">
+        <div><div class="mpl">Selling Price</div><span class="mplk">Sri Lankan Rupees · Second-hand</span></div>
+        <div class="mpv">Rs. ${b.pr}</div>
+      </div>
+    </div>`;
+  document.getElementById('mo').classList.add('on');
+}
+
+function openPkg(id){
+  const p=PD[id];
+  const bl=p.bks.map(b=>`<li style="padding:.28rem 0;color:var(--is);font-size:.88rem">📖 ${b}</li>`).join('');
+  document.getElementById('mc').innerHTML=`
+    <div style="height:200px;background:linear-gradient(135deg,#0f0a05,#3a2510);border-radius:24px 24px 0 0;display:flex;align-items:center;justify-content:center;font-size:4rem">${p.em}</div>
+    <div class="mbd">
+      ${p.feat?'<div style="display:inline-block;background:var(--gold);color:var(--ink);font-size:.65rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;padding:.22rem .8rem;border-radius:50px;margin-bottom:.8rem">⭐ Best Deal</div>':''}
+      <div class="mti">${p.nm}</div>
+      <p class="mde">${p.de}</p>
+      <div style="background:rgba(201,168,76,.1);border-radius:12px;padding:1.1rem;margin-bottom:1.4rem">
+        <div style="font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gd);font-weight:600;margin-bottom:.7rem">Books Included</div>
+        <ul style="list-style:none">${bl}</ul>
+      </div>
+      <div class="mpb">
+        <div><div class="mpl">Bundle Price</div><span class="mplk">Was Rs. ${p.ws} individually · Save Rs. ${p.sv}</span></div>
+        <div style="text-align:right"><div class="mpv">Rs. ${p.pr}</div><div style="color:var(--gl);font-size:.75rem;opacity:.75;margin-top:.1rem">Save Rs. ${p.sv}!</div></div>
+      </div>
+    </div>`;
+  document.getElementById('mo').classList.add('on');
+}
+
+function closeMO(e){if(e.target===document.getElementById('mo'))closeM()}
+function closeM(){document.getElementById('mo').classList.remove('on')}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeM()});
+
+const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis')})},{threshold:.1});
+document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
